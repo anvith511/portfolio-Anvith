@@ -18,7 +18,9 @@ import RecruiterMode from '@/components/features/RecruiterMode';
 
 export default async function Home() {
   const sections = await getSections();
-  const enabledSections = sections.filter(s => s.enabled).sort((a, b) => a.order - b.order);
+  const enabledSections = (sections || [])
+    .filter(s => s.enabled !== false && (s as any).is_enabled !== false)
+    .sort((a, b) => (a.order ?? (a as any).order_index ?? 0) - (b.order ?? (b as any).order_index ?? 0));
 
   const sectionComponents: Record<string, React.ReactNode> = {
     hero: <HeroSection key="hero" />,
@@ -38,7 +40,10 @@ export default async function Home() {
   return (
     <PageTransition>
       <div className="flex flex-col gap-32 pb-32">
-        {enabledSections.map(section => sectionComponents[section.id])}
+        {enabledSections.map(section => {
+          const key = section.slug || (section as any).section_id || section.type || section.id;
+          return sectionComponents[key] || null;
+        })}
       </div>
       <AskAnvith />
       <InteractiveTerminal />

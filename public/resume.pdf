@@ -1,0 +1,93 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 2117 >>
+stream
+BT
+/F1 18 Tf
+50 770 Td
+(ANVITH KUMAR - SOFTWARE ENGINEER) Tj
+0 -20 Td
+/F1 10 Tf
+(Bengaluru, India | anvithkumar511@gmail.com | github.com/anvith511 | linkedin.com/in/anvith-kumar-7313a8220) Tj
+0 -24 Td
+/F1 12 Tf
+(EDUCATION) Tj
+0 -16 Td
+/F1 9 Tf
+(New Horizon College of Engineering (NHCE) - B.E. Computer Engineering - CGPA: 9.11 / 10.0 (2022 - 2026)) Tj
+0 -24 Td
+/F1 12 Tf
+(PROFESSIONAL EXPERIENCE) Tj
+0 -16 Td
+/F1 10 Tf
+(MindMatrix.io - AI App Developer Intern (Feb 2026 - Present)) Tj
+0 -14 Td
+/F1 9 Tf
+(- Engineered asynchronous REST APIs in FastAPI for real-time model inference and response parsing.) Tj
+0 -12 Td
+(- Constructed prompt engineering pipelines with strict schema validation; reduced latency by 35%.) Tj
+0 -16 Td
+/F1 10 Tf
+(NIIT Foundation | Cisco CSR - Cyber & AI Workforce Intern (Jan 2026 - Mar 2026)) Tj
+0 -14 Td
+/F1 9 Tf
+(- Simulated enterprise network traffic defense, firewall rule configurations, and RBAC security audits.) Tj
+0 -12 Td
+(- Applied machine learning classification models to categorize network anomalies and phishing vectors.) Tj
+0 -24 Td
+/F1 12 Tf
+(KEY PROJECTS) Tj
+0 -16 Td
+/F1 10 Tf
+(HelpMate - Community Volunteer Coordination Platform (React Native, FastAPI, MongoDB, Clerk, Stripe)) Tj
+0 -14 Td
+/F1 9 Tf
+(- Geospatial 2dsphere indexing for instant proximity-based volunteer dispatch and task lifecycle tracking.) Tj
+0 -16 Td
+/F1 10 Tf
+(Time Capsule - Encrypted Media Vault (React, Node.js, Express, MongoDB, AES-256, Cloudinary)) Tj
+0 -14 Td
+/F1 9 Tf
+(- Zero-knowledge client-side AES-256 encryption with time-locked scheduled delivery.) Tj
+0 -16 Td
+/F1 10 Tf
+(AI Code Reviewer - Browser Extension (React, Tailwind, Flask, Google Gemini API, SQLite)) Tj
+0 -14 Td
+/F1 9 Tf
+(- Automated CWE vulnerability scans and performance suggestions with contextual LLM prompts.) Tj
+0 -24 Td
+/F1 12 Tf
+(TECHNICAL SKILLS & ACHIEVEMENTS) Tj
+0 -16 Td
+/F1 9 Tf
+(Skills: Java, Python, TypeScript, JavaScript, SQL, React, Next.js, Node.js, FastAPI, MongoDB, AES-256, Git) Tj
+0 -14 Td
+(Achievements: 370+ LeetCode DSA Solved | 100-Day Daily Streak Badge | VTU Handball Nationals Player) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000002410 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2480
+%%EOF

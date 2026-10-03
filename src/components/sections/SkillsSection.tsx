@@ -3,93 +3,134 @@
 import React, { useState } from 'react';
 import { TerminalPrompt } from '../terminal/TerminalPrompt';
 import { RevealOnScroll } from '../animations/RevealOnScroll';
-
-const skillsData = [
-  {
-    category: 'PROGRAMMING',
-    skills: ['Java', 'Python', 'JavaScript', 'SQL']
-  },
-  {
-    category: 'DEVELOPMENT',
-    skills: ['React', 'React Native', 'Node.js', 'FastAPI', 'Flask', 'HTML', 'CSS']
-  },
-  {
-    category: 'DATABASE',
-    skills: ['MongoDB', 'SQL', 'SQLite']
-  },
-  {
-    category: 'CONCEPTS',
-    skills: ['DSA', 'OOP', 'DBMS', 'Operating Systems', 'Computer Networks', 'System Design']
-  },
-  {
-    category: 'SECURITY',
-    skills: ['Cryptography', 'RBAC', 'Digital Forensics', 'Vulnerability Assessment', 'Cybersecurity']
-  },
-  {
-    category: 'TOOLS',
-    skills: ['GitHub', 'Postman', 'Tableau', 'Snowflake', 'Android Studio', 'VS Code']
-  }
-];
+import { Terminal, CheckCircle2, ArrowRight, Layers, Sparkles } from 'lucide-react';
+import { skillCategoriesData, skillEvidenceMap } from '@/data/skills';
 
 export const SkillsSection = () => {
-  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const [activeSkill, setActiveSkill] = useState<string>('Java');
+
+  const activeEvidence = skillEvidenceMap[activeSkill] || {
+    name: activeSkill,
+    category: 'Engineering Competency',
+    usedIn: ['Production Projects & Algorithmic Problem Solving'],
+    context: `Applied in engineering systems, verified coursework at New Horizon College of Engineering, and rigorous implementations.`,
+    concepts: ['Practical Engineering', 'Clean Code', 'Performance Optimization'],
+  };
 
   return (
-    <section id="skills" className="section-padding bg-[#050505]">
+    <section id="skills" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <TerminalPrompt command="./skills" className="mb-16" />
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <TerminalPrompt command="./skills --inspect" className="mb-4" />
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
+                Technical Stack & Evidence
+              </h2>
+            </div>
+            <p className="font-mono text-sm text-[var(--muted-foreground)] max-w-md">
+              Categorized core competencies with verified engineering evidence from production builds and algorithmic problem solving.
+            </p>
+          </div>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 space-y-12">
-            {skillsData.map((group) => (
-              <div key={group.category}>
-                <h3 className="font-mono text-sm text-gray-500 mb-6 border-b border-gray-900 pb-2">
-                  // {group.category}
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {group.skills.map(skill => (
-                    <button
-                      key={skill}
-                      onClick={() => setActiveSkill(skill === activeSkill ? null : skill)}
-                      className={`px-4 py-2 font-mono text-sm border transition-colors ${
-                        activeSkill === skill 
-                          ? 'border-white text-white bg-white/5' 
-                          : 'border-gray-800 text-gray-400 hover:border-gray-500 hover:text-gray-200'
-                      }`}
-                    >
-                      {skill}
-                    </button>
-                  ))}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Skill Groups (8 cols) */}
+          <div className="lg:col-span-8 space-y-10">
+            {skillCategoriesData.map((group) => (
+              <div key={group.name} className="border-b border-[var(--border-light)] pb-8 last:border-b-0">
+                <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-widest">
+                  <span className="text-[var(--foreground)] font-bold">//</span>
+                  <span>{group.name}</span>
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {group.skills.map((skill) => {
+                    const isSelected = activeSkill === skill;
+                    return (
+                      <button
+                        key={skill}
+                        onClick={() => setActiveSkill(skill)}
+                        className={`px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-all duration-200 cursor-pointer ${
+                          isSelected
+                            ? 'bg-[var(--foreground)] text-[var(--background)] border-[var(--foreground)] shadow-[2px_2px_0px_var(--foreground)]'
+                            : 'bg-[var(--background)] text-[var(--foreground)] border-[var(--border-light)] hover:border-[var(--foreground)] hover:bg-[var(--muted)]'
+                        }`}
+                      >
+                        {skill}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 border border-gray-800 p-8 h-[400px] bg-black flex flex-col">
-              <div className="font-mono text-xs text-gray-600 mb-4 border-b border-gray-900 pb-2">
-                SKILL_INSPECTOR v1.0
+          {/* Interactive Skill Inspector Card (4 cols) */}
+          <div className="lg:col-span-4 sticky top-28">
+            <div className="border border-[var(--border-light)] p-8 bg-[var(--muted)] shadow-[6px_6px_0px_var(--border-light)] transition-all duration-300 hover:border-[var(--foreground)]">
+              <div className="flex items-center justify-between pb-4 mb-6 border-b border-[var(--border-light)]">
+                <div className="flex items-center gap-2 font-mono text-xs text-[var(--muted-foreground)]">
+                  <Terminal size={14} className="text-[var(--foreground)]" />
+                  <span>SKILL_INSPECTOR v2.0</span>
+                </div>
+                <span className="flex items-center gap-1.5 font-mono text-[10px] text-[var(--foreground)] px-2 py-0.5 border border-[var(--border-light)] bg-[var(--background)]">
+                  <Sparkles size={10} />
+                  <span>EVIDENCE</span>
+                </span>
               </div>
-              
-              {activeSkill ? (
-                <div className="flex-1 flex flex-col space-y-4 animate-in fade-in duration-300">
-                  <h4 className="text-2xl font-bold uppercase tracking-tight">{activeSkill}</h4>
-                  <div className="font-mono text-sm text-gray-400 space-y-2">
-                    <p>&gt; Status: Proficient</p>
-                    <p>&gt; Used in: HelpMate, Time Capsule</p>
-                    <p className="mt-4 text-gray-500">
-                      // Select another skill to inspect or click again to clear.
-                    </p>
+
+              <div className="space-y-6">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--muted-foreground)] block mb-1">
+                    {activeEvidence.category}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-[var(--foreground)]">
+                    {activeSkill}
+                  </h3>
+                </div>
+
+                <div className="border-t border-[var(--border-light)] pt-4">
+                  <span className="font-mono text-[11px] text-[var(--muted-foreground)] uppercase tracking-wider block mb-2 font-bold flex items-center gap-1.5">
+                    <Layers size={12} className="text-[var(--foreground)]" />
+                    <span>Applied In:</span>
+                  </span>
+                  <ul className="space-y-1.5">
+                    {activeEvidence.usedIn.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2 font-mono text-xs text-[var(--foreground)]">
+                        <ArrowRight size={12} className="text-[var(--muted-foreground)] shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="border-t border-[var(--border-light)] pt-4">
+                  <span className="font-mono text-[11px] text-[var(--muted-foreground)] uppercase tracking-wider block mb-2 font-bold">
+                    // Engineering Context:
+                  </span>
+                  <p className="text-xs text-[var(--foreground)] leading-relaxed font-sans">
+                    {activeEvidence.context}
+                  </p>
+                </div>
+
+                <div className="border-t border-[var(--border-light)] pt-4">
+                  <span className="font-mono text-[11px] text-[var(--muted-foreground)] uppercase tracking-wider block mb-2 font-bold">
+                    Key Concepts:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {activeEvidence.concepts.map((c, i) => (
+                      <span key={i} className="text-[10px] font-mono px-2 py-1 bg-[var(--background)] border border-[var(--border-light)] text-[var(--foreground)]">
+                        {c}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              ) : (
-                <div className="flex-1 flex items-center justify-center font-mono text-sm text-gray-600 text-center">
-                  Select a skill to view details.<br/>
-                  <span className="animate-pulse">_</span>
-                </div>
-              )}
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-[var(--border-light)] font-mono text-[10px] text-[var(--muted-foreground)] flex items-center justify-between">
+                <span>CLICK ANY TAG TO INSPECT</span>
+                <CheckCircle2 size={12} className="text-[var(--foreground)]" />
+              </div>
             </div>
           </div>
         </div>

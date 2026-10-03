@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef, KeyboardEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '@/hooks/useTheme';
+import { useRecruiterMode } from '@/hooks/useRecruiterMode';
 
 type CommandRecord = {
   command: string;
@@ -11,9 +13,11 @@ type CommandRecord = {
 export default function InteractiveTerminal() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
+  const { theme, toggleTheme } = useTheme();
+  const { toggleRecruiterMode } = useRecruiterMode();
   const [history, setHistory] = useState<CommandRecord[]>([
-    { command: '', output: 'anvith@portfolio v1.0.0' },
-    { command: '', output: 'Type "help" to see available commands.' }
+    { command: '', output: 'anvith@portfolio:~$ system --init' },
+    { command: '', output: 'Type "help" for a list of available commands.' }
   ]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,66 +56,81 @@ export default function InteractiveTerminal() {
     switch (trimmedCmd) {
       case 'help':
         output = (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 text-sm text-gray-400">
-            {commandsList.map(c => <div key={c}>- {c}</div>)}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 text-xs font-mono text-gray-400">
+            {commandsList.map(c => <div key={c}>$ {c}</div>)}
           </div>
         );
         break;
       case 'whoami':
-        output = 'Anvith Kumar | Software | Data | AI | Computer Engineering. Turning coffee into code.';
+        output = 'Anvith Kumar | Computer Engineering Graduate (NHCE, CGPA 9.11) | Software | Data | AI | Security.';
         break;
       case 'about':
       case 'skills':
       case 'projects':
       case 'experience':
+      case 'journey':
+      case 'achievements':
+      case 'certifications':
+      case 'stats':
       case 'contact':
         output = `Navigating to ${trimmedCmd}...`;
-        const el = document.getElementById(trimmedCmd);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-        else output = `Section '${trimmedCmd}' not found on this page.`;
+        const targetId = trimmedCmd === 'journey' ? 'journey' : trimmedCmd;
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          setIsOpen(false);
+        } else {
+          output = `Section '${trimmedCmd}' not found on this page.`;
+        }
         break;
       case 'education':
-        output = 'B.Tech in Computer Engineering, NMAM Institute of Technology (2021-2025). CGPA: 9.11/10';
+        output = 'New Horizon College of Engineering (NHCE), B.E. in Computer Engineering (2022-2026). CGPA: 9.11/10.';
         break;
       case 'achievements':
-        output = '370+ Leetcode Questions. Knight badge on LeetCode.';
+        output = '370+ LeetCode problems, 100-day streak badge, State-level athletics / handball, VTU Handball Nationals representative.';
         break;
       case 'certifications':
-        output = 'Infosys Springboard, Hackerrank Problem Solving (Basic, Intermediate), Rest API (Basic).';
+        output = 'Google Foundations of Cybersecurity, IBM Cloud Computing, Microsoft Data Analyst 101, Simplilearn Tableau.';
         break;
       case 'stats':
-        output = 'Projects: 6+, Internships: 2, Leetcode: 370+, GitHub Commits: Many';
+        output = 'LeetCode: 370+ Solved | Major Projects: 6+ | Internships: 2 | CGPA: 9.11';
         break;
       case 'resume':
       case 'cat resume.pdf':
-        output = 'Opening resume...';
-        window.open('/resume.pdf', '_blank');
+        output = 'Navigating to verified resume view...';
+        window.location.href = '/resume';
         break;
       case 'github':
-        output = 'Opening GitHub...';
-        window.open('https://github.com/anvith511', '_blank');
+        output = 'Navigating to github.com/anvith511...';
+        window.location.href = 'https://github.com/anvith511';
+        break;
+      case 'linkedin':
+        output = 'Navigating to LinkedIn profile...';
+        window.location.href = 'https://linkedin.com/in/anvith-kumar-7313a8220';
         break;
       case 'clear':
         setHistory([]);
         return;
       case 'theme':
-        output = 'Theme toggling not implemented yet. Sticking to mono.';
+        toggleTheme();
+        output = `Toggled monochrome theme. Switched to ${theme === 'light' ? 'dark' : 'light'} mode.`;
         break;
       case 'recruiter':
-        output = 'Toggling recruiter mode...';
-        // Implement recruiter toggle context here
+        toggleRecruiterMode();
+        setIsOpen(false);
+        output = 'Recruiter Mode toggled.';
         break;
       case 'sudo hire anvith':
-        output = <span className="font-bold">permission granted. Offer letter pending...</span>;
+        output = <span className="font-bold text-white">permission granted. Offer letter pending... Welcome aboard!</span>;
         break;
       case 'coffee':
         output = 'coffee.service started successfully. [OK] Caffeine level: 100%';
         break;
       case 'ls':
-        output = 'about/ projects/ skills/ experience/ resume.pdf contact/';
+        output = 'about/  projects/  skills/  experience/  resume.pdf  contact/';
         break;
       default:
-        output = `command not found: ${trimmedCmd}. Type 'help' for available commands.`;
+        output = `command not found: '${trimmedCmd}'. Type 'help' for available commands.`;
     }
 
     setHistory((prev) => [...prev, { command: cmd, output }]);
