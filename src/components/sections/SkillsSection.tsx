@@ -21,7 +21,7 @@ export const SkillsSection = () => {
     <section id="skills" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="./skills --inspect" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
@@ -34,11 +34,11 @@ export const SkillsSection = () => {
           </div>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Skill Groups (8 cols) */}
-          <div className="lg:col-span-8 space-y-10">
+          <div className="lg:col-span-8 space-y-6">
             {skillCategoriesData.map((group) => (
-              <div key={group.name} className="border-b border-[var(--border-light)] pb-8 last:border-b-0">
+              <div key={group.name} className="border-b border-[var(--border-light)] pb-5 last:border-b-0">
                 <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-widest">
                   <span className="text-[var(--foreground)] font-bold">//</span>
                   <span>{group.name}</span>

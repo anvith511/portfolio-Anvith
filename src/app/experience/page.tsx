@@ -1,95 +1,153 @@
-import { getExperience, getEducation } from '@/lib/queries';
 import PageTransition from '@/components/layout/PageTransition';
 import TerminalPrompt from '@/components/terminal/TerminalPrompt';
+import Link from 'next/link';
+import { experiencesData, educationData } from '@/data/experience';
+import { ArrowLeft, Briefcase, GraduationCap, Calendar, CheckCircle2 } from 'lucide-react';
 
-export const metadata = { title: 'Experience | Anvith Kumar' };
+export const metadata = { 
+  title: 'Experience | Anvith Kumar — Work & Education',
+  description: 'Internships and academic credentials for Anvith Kumar, featuring work at MindMatrix.io, NIIT Foundation / Cisco CSR, and New Horizon College of Engineering.'
+};
 
-export default async function ExperiencePage() {
-  const experience = await getExperience();
-  const education = await getEducation();
-
+export default function ExperiencePage() {
   return (
     <PageTransition>
-      <div className="max-w-4xl mx-auto py-24 px-6 min-h-[85vh]">
-        <TerminalPrompt command="cat experience.log" />
-        <h1 className="text-5xl md:text-7xl font-bold mb-24 uppercase tracking-tighter mt-8 text-white">Experience</h1>
-
-        <div className="space-y-32">
-          <section>
-            <div className="flex items-center gap-4 mb-16">
-              <div className="h-px bg-gray-800 flex-grow"></div>
-              <h2 className="text-sm font-mono uppercase tracking-widest text-gray-500">Work History</h2>
-              <div className="h-px bg-gray-800 flex-grow"></div>
-            </div>
-
-            <div className="space-y-16">
-              {experience.map((exp: any, i: number) => (
-                <div key={i} className="relative pl-8 md:pl-0">
-                  <div className="md:grid md:grid-cols-12 md:gap-8">
-                    <div className="md:col-span-3 font-mono text-sm text-gray-500 mb-4 md:mb-0 md:text-right pt-1">
-                      {exp.startDate} - {exp.endDate}
-                    </div>
-                    <div className="md:col-span-9 border-l border-gray-800 pl-8 md:pl-12 pb-12 relative">
-                      <div className="absolute top-1.5 -left-1.5 w-3 h-3 bg-black border border-gray-500"></div>
-                      <h3 className="text-2xl font-bold text-white mb-1">{exp.role}</h3>
-                      <div className="text-lg text-gray-400 mb-6">{exp.company}</div>
-                      <p className="text-gray-300 leading-relaxed mb-6">{exp.description}</p>
-                      {exp.achievements && (
-                        <ul className="space-y-4 mb-8">
-                          {exp.achievements.map((ach: string, j: number) => (
-                            <li key={j} className="flex gap-4 text-gray-400 text-base items-start">
-                              <span className="text-gray-600 font-mono mt-0.5">/</span>
-                              <span>{ach}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                      {exp.tech && (
-                        <div className="flex flex-wrap gap-2">
-                          {exp.tech.map((t: string) => (
-                            <span key={t} className="text-xs font-mono text-gray-500 border border-gray-800 px-3 py-1 bg-black/50">
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <div className="flex items-center gap-4 mb-16">
-              <div className="h-px bg-gray-800 flex-grow"></div>
-              <h2 className="text-sm font-mono uppercase tracking-widest text-gray-500">Education</h2>
-              <div className="h-px bg-gray-800 flex-grow"></div>
-            </div>
-
-            <div className="space-y-8">
-              {education?.map((edu: any, i: number) => (
-                <div key={i} className="border border-gray-800 p-8 bg-black">
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">{edu.institution}</h3>
-                      <div className="text-gray-400">{edu.degree}</div>
-                    </div>
-                    <div className="font-mono text-sm text-gray-500 text-left md:text-right">
-                      <div>{edu.startDate} - {edu.endDate}</div>
-                      <div className="mt-1">{edu.location}</div>
-                    </div>
-                  </div>
-                  {edu.score && (
-                    <div className="inline-block mt-4 px-3 py-1 border border-gray-800 font-mono text-sm text-white bg-gray-900">
-                      CGPA: {edu.score}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
+      <div className="max-w-4xl mx-auto py-20 px-6 min-h-[85vh]">
+        <div className="flex items-center justify-between mb-8">
+          <Link 
+            href="/" 
+            className="inline-flex items-center gap-2 font-mono text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors border border-[var(--border-light)] px-3 py-1.5 bg-[var(--muted)]"
+          >
+            <ArrowLeft size={14} />
+            <span>cd .. (Back to Home)</span>
+          </Link>
+          <span className="font-mono text-xs text-[var(--muted-foreground)]">CAT experience.log</span>
         </div>
+
+        <TerminalPrompt command="cat experience.log --all --verified" />
+        <h1 className="text-4xl sm:text-6xl font-black mb-6 uppercase tracking-tighter mt-6 text-[var(--foreground)]">
+          Work & Education
+        </h1>
+        <p className="text-[var(--muted-foreground)] text-base sm:text-lg mb-16 max-w-2xl leading-relaxed font-mono">
+          Industry internships in applied AI engineering and network defense, backed by top-percentile academic standing in Computer Engineering.
+        </p>
+
+        {/* Experience Timeline */}
+        <section className="mb-20">
+          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted-foreground)] mb-8 border-b border-[var(--border-light)] pb-3 font-bold flex items-center gap-2">
+            <Briefcase size={14} className="text-[var(--foreground)]" />
+            <span>// Professional Experience</span>
+          </h2>
+
+          <div className="space-y-12">
+            {experiencesData.map((exp, i) => (
+              <div 
+                key={exp.id} 
+                className="border border-[var(--border-light)] p-8 bg-[var(--background)] shadow-[4px_4px_0px_var(--border-light)]"
+              >
+                <div className="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2 mb-4 pb-4 border-b border-[var(--border-light)]">
+                  <div>
+                    <span className="font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-wider block mb-1">
+                      0{i + 1} // {exp.type}
+                    </span>
+                    <h3 className="text-2xl font-bold text-[var(--foreground)]">{exp.position}</h3>
+                    <div className="text-sm font-mono text-[var(--foreground)] font-medium mt-0.5">
+                      {exp.company} • {exp.location}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5 font-mono text-xs text-[var(--muted-foreground)] bg-[var(--muted)] px-2.5 py-1 border border-[var(--border-light)] self-start sm:self-auto">
+                    <Calendar size={12} />
+                    <span>{exp.period}</span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-[var(--foreground)] leading-relaxed mb-6 font-light">
+                  {exp.description}
+                </p>
+
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[var(--muted-foreground)] font-bold block mb-2">Key Responsibilities:</span>
+                    <ul className="list-disc list-inside space-y-1.5 text-xs text-[var(--foreground)]">
+                      {exp.responsibilities.map((r, idx) => (
+                        <li key={idx}>{r}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[var(--muted-foreground)] font-bold block mb-2">Measurable Impact:</span>
+                    <ul className="space-y-1.5 text-xs text-[var(--foreground)]">
+                      {exp.measurable_achievements.map((ach, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <CheckCircle2 size={13} className="text-[var(--foreground)] shrink-0 mt-0.5" />
+                          <span>{ach}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-light)]">
+                  {exp.technologies.map((t) => (
+                    <span key={t} className="font-mono text-[10px] px-2.5 py-1 border border-[var(--border-light)] bg-[var(--muted)] text-[var(--foreground)]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Education Section */}
+        <section>
+          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted-foreground)] mb-8 border-b border-[var(--border-light)] pb-3 font-bold flex items-center gap-2">
+            <GraduationCap size={14} className="text-[var(--foreground)]" />
+            <span>// Education</span>
+          </h2>
+
+          {educationData.map((edu) => (
+            <div key={edu.id} className="border border-[var(--border-light)] p-8 bg-[var(--muted)]">
+              <div className="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2 mb-4 pb-4 border-b border-[var(--border-light)]">
+                <div>
+                  <h3 className="text-2xl font-bold text-[var(--foreground)]">{edu.institution}</h3>
+                  <div className="text-sm font-mono text-[var(--foreground)] mt-1">
+                    {edu.degree} in {edu.field}
+                  </div>
+                </div>
+                <div className="font-mono text-xs text-[var(--muted-foreground)]">
+                  {edu.period}
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <span className="font-mono text-xs bg-[var(--background)] text-[var(--foreground)] border border-[var(--border-light)] px-3 py-1 font-bold inline-block mb-3">
+                  CGPA: {edu.gpa} (Top Percentile)
+                </span>
+                <ul className="space-y-1.5 text-xs text-[var(--foreground)]">
+                  {edu.highlights.map((h, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="text-[var(--muted-foreground)]">&bull;</span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <span className="font-mono text-[10px] uppercase text-[var(--muted-foreground)] font-bold block mb-2">Relevant Core Coursework:</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {edu.coursework.map((c) => (
+                    <span key={c} className="font-mono text-[10px] px-2 py-0.5 border border-[var(--border-light)] bg-[var(--background)] text-[var(--foreground)]">
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
       </div>
     </PageTransition>
   );

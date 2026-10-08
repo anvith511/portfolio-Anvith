@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Terminal, Send, X, Sparkles } from 'lucide-react';
 
 type Message = {
   role: 'user' | 'ai';
@@ -19,11 +19,18 @@ const SUGGESTED_QUESTIONS = [
 export default function AskAnvith() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'ai', content: "Hi. I'm ask.anvith. Ask me anything about Anvith's background, projects, or skills." }
+    { role: 'ai', content: "Hi! I'm ask.anvith. Ask me anything about Anvith's background, projects, engineering stack, or credentials." }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -32,9 +39,10 @@ export default function AskAnvith() {
   }, [messages, isLoading]);
 
   const sendMessage = async (text: string) => {
-    if (!text.trim()) return;
+    const trimmed = text.trim();
+    if (!trimmed || isLoading) return;
 
-    const userMsg: Message = { role: 'user', content: text };
+    const userMsg: Message = { role: 'user', content: trimmed };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
@@ -43,15 +51,15 @@ export default function AskAnvith() {
       const response = await fetch('/api/ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: messages })
+        body: JSON.stringify({ message: trimmed, history: messages })
       });
       
       if (!response.ok) throw new Error('API error');
       const data = await response.json();
       
-      setMessages(prev => [...prev, { role: 'ai', content: data.reply }]);
+      setMessages(prev => [...prev, { role: 'ai', content: data.reply || "No reply received." }]);
     } catch {
-      setMessages(prev => [...prev, { role: 'ai', content: "Error communicating with server. I am running in offline mode." }]);
+      setMessages(prev => [...prev, { role: 'ai', content: "I am running with offline fallback data. Anvith is a Computer Engineering graduate (NHCE, CGPA 9.11) specializing in Software Engineering, AI, and Cybersecurity." }]);
     } finally {
       setIsLoading(false);
     }
@@ -59,89 +67,114 @@ export default function AskAnvith() {
 
   return (
     <>
+      {/* Floating launcher button */}
       <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-40 px-4 py-2 bg-white text-black border border-black font-mono text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors"
+        type="button"
+        onClick={() => setIsOpen(prev => !prev)}
+        className="fixed bottom-6 right-6 z-[990] px-4 py-2.5 bg-[var(--foreground)] text-[var(--background)] border border-[var(--foreground)] font-mono text-xs uppercase tracking-widest font-bold shadow-[4px_4px_0px_var(--border-light)] hover:opacity-90 transition-all cursor-pointer flex items-center gap-2"
+        aria-label="Toggle Ask Anvith AI Assistant"
       >
-        ask.anvith
+        <Sparkles size={14} />
+        <span>ask.anvith</span>
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-24 right-6 z-50 w-80 md:w-96 bg-white border border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] flex flex-col h-[500px]"
-          >
-            <div className="flex justify-between items-center px-4 py-3 border-b border-black bg-black text-white">
-              <div className="font-mono text-sm tracking-widest">ask.anvith</div>
-              <button onClick={() => setIsOpen(false)} className="hover:text-gray-300 font-bold">
-                [X]
-              </button>
+      {/* Chat modal window */}
+      {isOpen && (
+        <div
+          className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-[999] w-[calc(100vw-2rem)] sm:w-96 bg-[var(--background)] text-[var(--foreground)] border-2 border-[var(--foreground)] shadow-[8px_8px_0px_var(--foreground)] flex flex-col h-[520px] max-h-[80vh]"
+          role="dialog"
+          aria-label="Ask Anvith Assistant"
+        >
+          {/* Header */}
+          <div className="flex justify-between items-center px-4 py-3 border-b border-[var(--foreground)] bg-[var(--foreground)] text-[var(--background)]">
+            <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase">
+              <Terminal size={14} />
+              <span>ask.anvith // AI Agent</span>
             </div>
-            
-            <div 
-              ref={scrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 text-sm font-sans"
+            <button 
+              type="button"
+              onClick={() => setIsOpen(false)} 
+              className="p-1 hover:opacity-75 font-mono text-xs font-bold cursor-pointer"
+              aria-label="Close"
             >
-              {messages.map((msg, i) => (
-                <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                  <div className="text-xs font-mono text-gray-500 mb-1">{msg.role === 'user' ? 'YOU' : 'AI'}</div>
-                  <div className={`px-3 py-2 ${msg.role === 'user' ? 'bg-black text-white' : 'bg-gray-100 text-black border border-gray-200'} max-w-[85%]`}>
-                    {msg.content}
-                  </div>
+              <X size={16} />
+            </button>
+          </div>
+          
+          {/* Messages list */}
+          <div 
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto p-4 space-y-4 text-xs font-sans bg-[var(--background)]"
+          >
+            {messages.map((msg, i) => (
+              <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div className="text-[10px] font-mono text-[var(--muted-foreground)] mb-1">
+                  {msg.role === 'user' ? 'YOU' : 'ANVITH_AI'}
                 </div>
-              ))}
-              {isLoading && (
-                <div className="flex flex-col items-start">
-                  <div className="text-xs font-mono text-gray-500 mb-1">AI</div>
-                  <div className="px-3 py-2 bg-gray-100 text-black border border-gray-200 font-mono text-xs animate-pulse">
-                    typing...
-                  </div>
+                <div 
+                  className={`px-3 py-2 leading-relaxed max-w-[85%] border ${
+                    msg.role === 'user' 
+                      ? 'bg-[var(--foreground)] text-[var(--background)] border-[var(--foreground)]' 
+                      : 'bg-[var(--muted)] text-[var(--foreground)] border-[var(--border-light)]'
+                  }`}
+                >
+                  {msg.content}
                 </div>
-              )}
-            </div>
-
-            {messages.length === 1 && (
-              <div className="px-4 py-2 border-t border-gray-200 bg-gray-50">
-                <div className="text-xs font-mono text-gray-500 mb-2">Suggested</div>
-                <div className="flex flex-wrap gap-2">
-                  {SUGGESTED_QUESTIONS.slice(0, 3).map((q, i) => (
-                    <button 
-                      key={i} 
-                      onClick={() => sendMessage(q)}
-                      className="text-xs border border-black px-2 py-1 hover:bg-black hover:text-white transition-colors text-left"
-                    >
-                      {q}
-                    </button>
-                  ))}
+              </div>
+            ))}
+            {isLoading && (
+              <div className="flex flex-col items-start">
+                <div className="text-[10px] font-mono text-[var(--muted-foreground)] mb-1">ANVITH_AI</div>
+                <div className="px-3 py-2 bg-[var(--muted)] text-[var(--foreground)] border border-[var(--border-light)] font-mono text-xs animate-pulse">
+                  processing query...
                 </div>
               </div>
             )}
-            
-            <form 
-              onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
-              className="border-t border-black p-2 flex"
+          </div>
+
+          {/* Quick prompts */}
+          {messages.length <= 2 && (
+            <div className="px-4 py-2 border-t border-[var(--border-light)] bg-[var(--muted)]">
+              <div className="text-[10px] font-mono text-[var(--muted-foreground)] mb-1.5 uppercase tracking-wider">Suggested Questions</div>
+              <div className="flex flex-wrap gap-1.5">
+                {SUGGESTED_QUESTIONS.slice(0, 3).map((q, i) => (
+                  <button 
+                    key={i} 
+                    type="button"
+                    onClick={() => sendMessage(q)}
+                    className="text-[10px] font-mono border border-[var(--border-light)] bg-[var(--background)] text-[var(--foreground)] px-2 py-1 hover:border-[var(--foreground)] transition-colors text-left cursor-pointer"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Input form */}
+          <form 
+            onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
+            className="border-t border-[var(--border-light)] p-2.5 flex items-center gap-2 bg-[var(--background)]"
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask about projects, stack, education..."
+              className="flex-1 bg-[var(--muted)] text-[var(--foreground)] border border-[var(--border-light)] px-3 py-2 text-xs font-mono outline-none focus:border-[var(--foreground)] transition-colors"
+            />
+            <button 
+              type="submit" 
+              disabled={!input.trim() || isLoading}
+              className="bg-[var(--foreground)] text-[var(--background)] px-3.5 py-2 text-xs font-mono font-bold uppercase disabled:opacity-50 hover:opacity-90 transition-opacity cursor-pointer flex items-center gap-1"
             >
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask a question..."
-                className="flex-1 bg-transparent outline-none border-none text-black px-2 text-sm"
-              />
-              <button 
-                type="submit" 
-                disabled={!input.trim() || isLoading}
-                className="bg-black text-white px-4 py-1 text-sm font-bold disabled:opacity-50"
-              >
-                SEND
-              </button>
-            </form>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <Send size={12} />
+              <span>Send</span>
+            </button>
+          </form>
+        </div>
+      )}
     </>
   );
 }

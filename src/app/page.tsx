@@ -39,7 +39,7 @@ export default async function Home() {
 
   return (
     <PageTransition>
-      <div className="flex flex-col gap-32 pb-32">
+      <div className="flex flex-col pb-12">
         {enabledSections.map(section => {
           const key = section.slug || (section as any).section_id || section.type || section.id;
           return sectionComponents[key] || null;

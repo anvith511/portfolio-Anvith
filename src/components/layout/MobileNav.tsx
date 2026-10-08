@@ -41,14 +41,23 @@ export function MobileNav() {
         <Link href="/" className="font-mono text-sm tracking-[0.2em] uppercase font-bold">
           ANVITH<span className="text-[var(--muted-foreground)]">.K</span>
         </Link>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2"
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isOpen}
-        >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="p-2 border border-[var(--border-light)] bg-[var(--muted)] text-[var(--foreground)] hover:border-[var(--foreground)] transition-colors cursor-pointer"
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 border border-[var(--border-light)] bg-[var(--muted)] text-[var(--foreground)] hover:border-[var(--foreground)] transition-colors cursor-pointer"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </div>
 
       {/* Menu overlay */}
@@ -88,20 +97,26 @@ export function MobileNav() {
               <div className="flex items-center gap-6 mt-8 pt-8 border-t border-[var(--border-light)]">
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center gap-2 font-mono text-sm text-[var(--muted-foreground)]"
+                  className="flex items-center gap-2 font-mono text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
                 >
                   {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
                   {theme === 'light' ? 'dark' : 'light'}
                 </button>
+                <Link
+                  href="/resume"
+                  className="flex items-center gap-2 font-mono text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                >
+                  <span>resume</span>
+                </Link>
                 <button
                   onClick={toggleRecruiterMode}
                   className={cn(
-                    'flex items-center gap-2 font-mono text-sm',
-                    isRecruiterMode ? 'text-[var(--foreground)]' : 'text-[var(--muted-foreground)]'
+                    'flex items-center gap-2 font-mono text-sm cursor-pointer',
+                    isRecruiterMode ? 'text-[var(--foreground)] font-bold' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
                   )}
                 >
                   <Zap size={16} />
-                  recruiter
+                  <span>recruiter</span>
                 </button>
               </div>
             </nav>

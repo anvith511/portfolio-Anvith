@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
+import { GoogleGenAI } from '@google/genai';
 
 const apiKey = process.env.GEMINI_API_KEY;
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 const ANVITH_RESUME_DATA = `
 Name: Anvith Kumar
@@ -105,34 +107,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
 
-    if (!apiKey) {
+    if (!ai) {
       const reply = fallbackKeywordMatcher(message);
       return NextResponse.json({ reply });
     }
 
-    // Call Gemini API server-side
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: SYSTEM_PROMPT + "\n\nUser Question: " + message }]
-          }
-        ]
-      })
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: SYSTEM_PROMPT + "\n\nUser Question: " + message,
     });
 
-    if (!response.ok) {
-      return NextResponse.json({ reply: fallbackKeywordMatcher(message) });
-    }
-
-    const data = await response.json();
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || fallbackKeywordMatcher(message);
-
+    const replyText = response.text || fallbackKeywordMatcher(message);
     return NextResponse.json({ reply: replyText });
 
   } catch {

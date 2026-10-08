@@ -19,7 +19,7 @@ export const ExperienceSection = ({
     <section id="experience" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="cat experience.log --verified" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
@@ -32,15 +32,15 @@ export const ExperienceSection = ({
           </div>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Experience Column (8 cols) */}
-          <div className="lg:col-span-8 space-y-8">
-            <div className="flex items-center gap-2 font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-widest mb-6">
+          <div className="lg:col-span-8 space-y-6">
+            <div className="flex items-center gap-2 font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-widest mb-4">
               <Briefcase size={14} className="text-[var(--foreground)]" />
               <span>Work & Research Experience</span>
             </div>
 
-            <StaggerChildren className="space-y-8">
+            <StaggerChildren className="space-y-6">
               {experiences.map((exp, index) => {
                 const tags: string[] = exp.technologies || exp.tags || [];
                 const role = exp.position || exp.role;
@@ -49,8 +49,8 @@ export const ExperienceSection = ({
 
                 return (
                   <StaggerItem key={exp.id || index}>
-                    <div className="border border-[var(--border-light)] bg-[var(--background)] p-8 md:p-10 transition-all duration-300 hover:border-[var(--foreground)] shadow-[4px_4px_0px_var(--border-light)] hover:shadow-[6px_6px_0px_var(--foreground)]">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-[var(--border-light)] gap-2">
+                    <div className="border border-[var(--border-light)] bg-[var(--background)] p-6 md:p-8 transition-all duration-300 hover:border-[var(--foreground)] shadow-[4px_4px_0px_var(--border-light)] hover:shadow-[6px_6px_0px_var(--foreground)]">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-[var(--border-light)] gap-2">
                         <div>
                           <span className="font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-wider block mb-1">
                             0{index + 1} // INTERNSHIP

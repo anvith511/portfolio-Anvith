@@ -16,7 +16,7 @@ export const ProjectsSection = ({ projects = fallbackProjects }: { projects?: an
     <section id="projects" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="ls projects/ --featured --detailed" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
@@ -29,7 +29,7 @@ export const ProjectsSection = ({ projects = fallbackProjects }: { projects?: an
           </div>
         </RevealOnScroll>
 
-        <StaggerChildren className="space-y-16">
+        <StaggerChildren className="space-y-8">
           {projects.map((project, idx) => {
             const num = String(idx + 1).padStart(2, '0');
             const techs: string[] = project.technologies || project.tech || [];
@@ -38,8 +38,8 @@ export const ProjectsSection = ({ projects = fallbackProjects }: { projects?: an
 
             return (
               <StaggerItem key={project.id || project.slug}>
-                <Card className="border-[var(--border-light)] bg-[var(--background)] p-8 md:p-14 hover:border-[var(--foreground)] transition-all duration-300 shadow-[4px_4px_0px_var(--border-light)] hover:shadow-[8px_8px_0px_var(--foreground)]">
-                  <CardHeader className="p-0 pb-8 mb-8 border-b border-[var(--border-light)] flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <Card className="border-[var(--border-light)] bg-[var(--background)] p-6 md:p-10 hover:border-[var(--foreground)] transition-all duration-300 shadow-[4px_4px_0px_var(--border-light)] hover:shadow-[8px_8px_0px_var(--foreground)]">
+                  <CardHeader className="p-0 pb-6 mb-6 border-b border-[var(--border-light)] flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div>
                       <div className="flex items-center gap-3 mb-2 font-mono text-xs text-[var(--muted-foreground)]">
                         <span className="text-[var(--foreground)] font-bold">{num}</span>

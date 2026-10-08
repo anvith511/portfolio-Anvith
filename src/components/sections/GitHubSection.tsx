@@ -30,7 +30,6 @@ interface GitHubData {
 
 export const GitHubSection = () => {
   const [data, setData] = useState<GitHubData | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
@@ -42,8 +41,6 @@ export const GitHubSection = () => {
         }
       } catch (error) {
         console.error('Failed to fetch github data from proxy route', error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchGitHubData();
@@ -89,7 +86,7 @@ export const GitHubSection = () => {
     <section id="github" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="gh repo list anvith511 --limit 6" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">

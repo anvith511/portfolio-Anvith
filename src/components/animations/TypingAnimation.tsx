@@ -12,7 +12,7 @@ interface TypingAnimationProps {
 }
 
 export function TypingAnimation({ text, speed = 50, delay = 0, className, onComplete }: TypingAnimationProps) {
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayedText, setDisplayedText] = useState(text);
   const [started, setStarted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
@@ -23,6 +23,7 @@ export function TypingAnimation({ text, speed = 50, delay = 0, className, onComp
       return;
     }
 
+    setDisplayedText('');
     const delayTimer = setTimeout(() => setStarted(true), delay);
     return () => clearTimeout(delayTimer);
   }, [delay, prefersReducedMotion, text, onComplete]);

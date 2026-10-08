@@ -35,7 +35,7 @@ export const StatsSection = ({ customStats }: { customStats?: StatItem[] }) => {
     <section id="stats" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="./stats --proof-of-work" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
@@ -49,7 +49,7 @@ export const StatsSection = ({ customStats }: { customStats?: StatItem[] }) => {
         </RevealOnScroll>
 
         {/* 4 Big Metrics */}
-        <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-20">
+        <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-10">
           {stats.map((stat, index) => (
             <StaggerItem 
               key={index} 

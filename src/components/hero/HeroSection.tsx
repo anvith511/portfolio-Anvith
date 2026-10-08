@@ -12,9 +12,9 @@ import { personalData } from '@/data/personal';
 
 export const HeroSection = () => {
   return (
-    <section className="min-h-[88vh] flex items-center pt-28 pb-20 lg:py-0 border-b border-[var(--border-light)]">
-      <div className="content-width grid grid-cols-1 lg:grid-cols-12 gap-16 items-center w-full">
-        <FadeIn delay={0.2} className="lg:col-span-7 flex flex-col space-y-8">
+    <section className="flex items-center py-10 lg:py-16 border-b border-[var(--border-light)]">
+      <div className="content-width grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
+        <FadeIn delay={0.2} className="lg:col-span-7 flex flex-col space-y-6">
           <div className="flex items-center justify-between">
             <TerminalPrompt command="whoami" className="mb-0" />
             <div className="flex items-center gap-1.5 font-mono text-xs text-[var(--muted-foreground)] px-2.5 py-1 border border-[var(--border-light)] bg-[var(--muted)]">

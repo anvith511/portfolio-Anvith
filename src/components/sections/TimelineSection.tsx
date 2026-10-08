@@ -42,7 +42,7 @@ export const TimelineSection = () => {
     <section id="journey" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="cat journey.txt --graph" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
@@ -55,8 +55,8 @@ export const TimelineSection = () => {
           </div>
         </RevealOnScroll>
 
-        <div className="max-w-4xl border border-[var(--border-light)] p-8 md:p-12 bg-[var(--muted)] shadow-[6px_6px_0px_var(--border-light)]">
-          <div className="flex items-center gap-2 font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-wider pb-4 mb-8 border-b border-[var(--border-light)]">
+        <div className="max-w-4xl border border-[var(--border-light)] p-6 md:p-8 bg-[var(--muted)] shadow-[6px_6px_0px_var(--border-light)]">
+          <div className="flex items-center gap-2 font-mono text-xs text-[var(--muted-foreground)] uppercase tracking-wider pb-3 mb-6 border-b border-[var(--border-light)]">
             <Milestone size={14} className="text-[var(--foreground)]" />
             <span>PROGRESSION_GRAPH // 2022 - 2026</span>
           </div>

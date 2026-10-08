@@ -3,14 +3,14 @@
 import React from 'react';
 import { TerminalPrompt } from '../terminal/TerminalPrompt';
 import { RevealOnScroll } from '../animations/RevealOnScroll';
-import { Terminal, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Terminal } from 'lucide-react';
 
 export const AboutSection = () => {
   return (
     <section id="about" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="cat about.md --full" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
@@ -23,7 +23,7 @@ export const AboutSection = () => {
           </div>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-7 space-y-8">
             <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--foreground)]">
               Engineering software that addresses real-world complexity.

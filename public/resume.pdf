@@ -9,21 +9,26 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
 endobj
 4 0 obj
-<< /Length 2117 >>
+<< /Length 2679 >>
 stream
 BT
 /F1 18 Tf
-50 770 Td
-(ANVITH KUMAR - SOFTWARE ENGINEER) Tj
-0 -20 Td
+50 780 Td
+(ANVITH KUMAR) Tj
+0 -18 Td
 /F1 10 Tf
+(Computer Engineering Graduate | Software, Data, AI & Security) Tj
+0 -16 Td
+/F1 9 Tf
 (Bengaluru, India | anvithkumar511@gmail.com | github.com/anvith511 | linkedin.com/in/anvith-kumar-7313a8220) Tj
 0 -24 Td
 /F1 12 Tf
 (EDUCATION) Tj
 0 -16 Td
 /F1 9 Tf
-(New Horizon College of Engineering (NHCE) - B.E. Computer Engineering - CGPA: 9.11 / 10.0 (2022 - 2026)) Tj
+(New Horizon College of Engineering (NHCE) - B.E. Computer Engineering (2022 - 2026)) Tj
+0 -12 Td
+(CGPA: 9.11 / 10.0 (Top Percentile) | Relevant Coursework: DSA, OS, DBMS, Networks, Security) Tj
 0 -24 Td
 /F1 12 Tf
 (PROFESSIONAL EXPERIENCE) Tj
@@ -34,44 +39,58 @@ BT
 /F1 9 Tf
 (- Engineered asynchronous REST APIs in FastAPI for real-time model inference and response parsing.) Tj
 0 -12 Td
-(- Constructed prompt engineering pipelines with strict schema validation; reduced latency by 35%.) Tj
+(- Implemented strict prompt evaluation pipelines, reducing latency by 35% with Redis caching.) Tj
 0 -16 Td
 /F1 10 Tf
 (NIIT Foundation | Cisco CSR - Cyber & AI Workforce Intern (Jan 2026 - Mar 2026)) Tj
 0 -14 Td
 /F1 9 Tf
-(- Simulated enterprise network traffic defense, firewall rule configurations, and RBAC security audits.) Tj
+(- Practical security engineering: enterprise network traffic defense, firewall policies, RBAC audits.) Tj
 0 -12 Td
-(- Applied machine learning classification models to categorize network anomalies and phishing vectors.) Tj
+(- Applied ML classification models to identify network anomalies and automated threat vectors.) Tj
 0 -24 Td
 /F1 12 Tf
 (KEY PROJECTS) Tj
 0 -16 Td
 /F1 10 Tf
-(HelpMate - Community Volunteer Coordination Platform (React Native, FastAPI, MongoDB, Clerk, Stripe)) Tj
+(HelpMate - Community Volunteer Coordination Platform) Tj
 0 -14 Td
 /F1 9 Tf
-(- Geospatial 2dsphere indexing for instant proximity-based volunteer dispatch and task lifecycle tracking.) Tj
+(- Cross-platform React Native app with FastAPI backend and MongoDB 2dsphere geospatial matching.) Tj
+0 -12 Td
+(- Integrated Clerk authentication, Stripe donations, and real-time Leaflet emergency radius dispatch.) Tj
 0 -16 Td
 /F1 10 Tf
-(Time Capsule - Encrypted Media Vault (React, Node.js, Express, MongoDB, AES-256, Cloudinary)) Tj
+(Time Capsule - Cryptographically Encrypted Media Storage Platform) Tj
 0 -14 Td
 /F1 9 Tf
-(- Zero-knowledge client-side AES-256 encryption with time-locked scheduled delivery.) Tj
+(- Zero-knowledge client-side AES-256 encryption with scheduled future unlock dates via NodeMailer.) Tj
 0 -16 Td
 /F1 10 Tf
-(AI Code Reviewer - Browser Extension (React, Tailwind, Flask, Google Gemini API, SQLite)) Tj
+(AI Code Reviewer - Browser Extension) Tj
 0 -14 Td
 /F1 9 Tf
-(- Automated CWE vulnerability scans and performance suggestions with contextual LLM prompts.) Tj
+(- In-browser developer extension using Google Gemini API for instant vulnerability audits and CWE scans.) Tj
 0 -24 Td
 /F1 12 Tf
-(TECHNICAL SKILLS & ACHIEVEMENTS) Tj
+(TECHNICAL SKILLS & CORE COMPETENCIES) Tj
 0 -16 Td
 /F1 9 Tf
-(Skills: Java, Python, TypeScript, JavaScript, SQL, React, Next.js, Node.js, FastAPI, MongoDB, AES-256, Git) Tj
-0 -14 Td
-(Achievements: 370+ LeetCode DSA Solved | 100-Day Daily Streak Badge | VTU Handball Nationals Player) Tj
+(Programming: Java, Python, JavaScript, TypeScript, SQL, C/C++) Tj
+0 -12 Td
+(Frontend: React, Next.js, React Native, Tailwind CSS | Backend: Node.js, FastAPI, Express, Flask) Tj
+0 -12 Td
+(Databases: MongoDB, PostgreSQL, SQLite, Redis | Security: AES-256, RBAC, Network Defense) Tj
+0 -24 Td
+/F1 12 Tf
+(KEY ACHIEVEMENTS) Tj
+0 -16 Td
+/F1 9 Tf
+(- Solved 370+ LeetCode algorithmic problems with a 100-Day consistency streak.) Tj
+0 -12 Td
+(- Represented Visvesvaraya Technological University (VTU) in Inter-University Handball Nationals.) Tj
+0 -12 Td
+(- State-level athletics and handball competitor; consistent top-tier academic rank holder.) Tj
 ET
 endstream
 endobj
@@ -85,9 +104,9 @@ xref
 0000000058 00000 n 
 0000000115 00000 n 
 0000000241 00000 n 
-0000002410 00000 n 
+0000002972 00000 n 
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-2480
+3042
 %%EOF

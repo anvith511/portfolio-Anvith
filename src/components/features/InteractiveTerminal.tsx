@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, KeyboardEvent } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { useTheme } from '@/hooks/useTheme';
 import { useRecruiterMode } from '@/hooks/useRecruiterMode';
 
@@ -11,6 +11,7 @@ type CommandRecord = {
 };
 
 export default function InteractiveTerminal() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const { theme, toggleTheme } = useTheme();
@@ -98,7 +99,7 @@ export default function InteractiveTerminal() {
       case 'resume':
       case 'cat resume.pdf':
         output = 'Navigating to verified resume view...';
-        window.location.href = '/resume';
+        router.push('/resume');
         break;
       case 'github':
         output = 'Navigating to github.com/anvith511...';
@@ -174,14 +175,10 @@ export default function InteractiveTerminal() {
         [ _terminal ]
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-24 left-6 z-50 w-[90vw] max-w-2xl bg-black border border-gray-800 shadow-2xl flex flex-col font-mono text-sm h-[60vh] max-h-[500px]"
-          >
+      {isOpen && (
+        <div
+          className="fixed bottom-20 sm:bottom-24 left-4 sm:left-6 z-[999] w-[calc(100vw-2rem)] sm:w-[90vw] max-w-2xl bg-black border border-gray-800 shadow-2xl flex flex-col font-mono text-sm h-[60vh] max-h-[500px]"
+        >
             <div className="flex justify-between items-center px-4 py-2 border-b border-gray-800 bg-[#0a0a0a]">
               <span className="text-gray-400">~/anvith-portfolio</span>
               <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-white">
@@ -219,9 +216,8 @@ export default function InteractiveTerminal() {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </>
   );
 }

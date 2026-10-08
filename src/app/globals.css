@@ -17,22 +17,26 @@
 }
 
 @layer base {
-  :root {
-    --background: #FFFFFF;
-    --foreground: #000000;
-    --muted: #F5F5F5;
-    --muted-foreground: #666666;
-    --border: #000000;
-    --border-light: #DDDDDD;
+  :root, html {
+    --background: #F4F5F7;
+    --foreground: #111111;
+    --muted: #FFFFFF;
+    --muted-foreground: #555555;
+    --border: #111111;
+    --border-light: #D5D7DC;
+    --dot-primary: rgba(0, 0, 0, 0.38);
+    --dot-secondary: rgba(0, 0, 0, 0.10);
   }
 
-  .dark {
-    --background: #000000;
-    --foreground: #FFFFFF;
-    --muted: #111111;
-    --muted-foreground: #888888;
-    --border: #FFFFFF;
-    --border-light: #222222;
+  html.dark, html[data-theme="dark"], body.dark, .dark {
+    --background: #0E0F12;
+    --foreground: #F4F5F7;
+    --muted: #18191E;
+    --muted-foreground: #8B8D97;
+    --border: #F4F5F7;
+    --border-light: #2A2C35;
+    --dot-primary: rgba(255, 255, 255, 0.32);
+    --dot-secondary: rgba(255, 255, 255, 0.08);
   }
 
   * {
@@ -40,7 +44,12 @@
   }
 
   body {
-    background: var(--background);
+    background-color: var(--background);
+    background-image: 
+      radial-gradient(circle at 1.5px 1.5px, var(--dot-primary) 1.25px, transparent 1.25px),
+      radial-gradient(circle at 1.5px 1.5px, var(--dot-secondary) 1.25px, transparent 1.25px);
+    background-size: 24px 24px, 24px 24px;
+    background-position: 0 0, 12px 12px;
     color: var(--foreground);
     font-family: var(--font-sans);
   }
@@ -64,14 +73,14 @@
   }
 
   .section-padding {
-    padding-top: 7.5rem;
-    padding-bottom: 7.5rem;
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
   }
 
   @media (min-width: 1024px) {
     .section-padding {
-      padding-top: 10rem;
-      padding-bottom: 10rem;
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
     }
   }
 

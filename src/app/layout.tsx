@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SceneLoader />
           <Sidebar />
           <MobileNav />
-          <main className="lg:ml-64 min-h-screen pt-16 lg:pt-0">
+          <main className="lg:ml-64 min-h-screen pt-16 lg:pt-0 relative z-10">
             {children}
           </main>
           <Footer />

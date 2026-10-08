@@ -5,7 +5,7 @@ import { TerminalPrompt } from '../terminal/TerminalPrompt';
 import { RevealOnScroll } from '../animations/RevealOnScroll';
 import { StaggerChildren, StaggerItem } from '../animations/StaggerChildren';
 import { Card, CardContent } from '../ui/Card';
-import { Trophy, Flame, Code2, Medal, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { Trophy, Flame, Code2, Medal, CheckCircle2 } from 'lucide-react';
 
 const achievementsList = [
   {
@@ -43,7 +43,7 @@ export const AchievementsSection = () => {
     <section id="achievements" className="section-padding border-b border-[var(--border-light)]">
       <div className="content-width">
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <TerminalPrompt command="./achievements --all" className="mb-4" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase text-[var(--foreground)]">
